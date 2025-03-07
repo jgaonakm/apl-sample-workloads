@@ -20,7 +20,7 @@ WORKDIR /App
 
 COPY --from=build-env /App/out .
 
-ENTRYPOINT [ "dotnet", "api.dll" ]
+ENTRYPOINT [ "dotnet", "weather-api.dll" ]
 
 
 
