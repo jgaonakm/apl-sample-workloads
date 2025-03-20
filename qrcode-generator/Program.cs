@@ -1,5 +1,7 @@
 using QRCoder;
 using static QRCoder.QRCodeGenerator;
+using static Microsoft.AspNetCore.Http.StatusCodes;
+
 
 // Configuring application
 var builder = WebApplication.CreateBuilder(args);
