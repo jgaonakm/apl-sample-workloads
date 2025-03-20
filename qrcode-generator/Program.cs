@@ -6,7 +6,6 @@ using static Microsoft.AspNetCore.Http.StatusCodes;
 // Configuring application
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
-app.UseHttpsRedirection();
 
 if (builder.Environment.IsDevelopment())
 {
