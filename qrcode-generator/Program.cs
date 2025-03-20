@@ -21,14 +21,6 @@ app.MapGet("/generate", async (HttpContext context) =>
 {
     // Required
     string? text = context.Request.Query["text"];
-    // Optional parameters
-    string? requestedVersion = context.Request.Query["version"];
-    string level = context.Request.Query["level"].FirstOrDefault();
-    if (string.IsNullOrEmpty(level))
-    {
-        level = "M";
-    }
-
     if (string.IsNullOrEmpty(text))
     {
         context.Response.StatusCode = 400;
@@ -36,11 +28,12 @@ app.MapGet("/generate", async (HttpContext context) =>
         return;
     }
 
-
-    int version = -1;
-    if (!string.IsNullOrEmpty(requestedVersion))
+    // Optional parameters
+    string? requestedVersion = context.Request.Query["version"];
+    string? level = context.Request.Query["level"].FirstOrDefault();
+    if (string.IsNullOrEmpty(level))
     {
-        int.TryParse(requestedVersion, out version);
+        level = "M"; // Default: 15% of loss
     }
 
     ECCLevel eccLevel;
@@ -65,6 +58,14 @@ app.MapGet("/generate", async (HttpContext context) =>
             return;
     }
 
+
+    int version = -1; // Default: let the library decide the best algorithm
+    if (!string.IsNullOrEmpty(requestedVersion))
+    {
+        int.TryParse(requestedVersion, out version);
+    }
+
+    // Code generation
     using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
     using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(
     text,
