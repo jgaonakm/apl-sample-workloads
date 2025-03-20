@@ -10,9 +10,13 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    Console.WriteLine("Running on Development mode!");
     app.UseSwagger();
     app.UseSwaggerUI();
+    builder.WebHost.UseUrls("http://localhost:5050", "https://localhost:5151");
+    //NOTE: Use dotnet dev-certs https --trust to run HTTPS locally
 }
+
 
 app.UseHttpsRedirection();
 
