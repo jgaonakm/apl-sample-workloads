@@ -8,11 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 app.UseHttpsRedirection();
 
-if (!builder.Environment.IsDevelopment())
-{
-    app.Urls.Add("https://*:8081");
-}
-else
+if (builder.Environment.IsDevelopment())
 {
     Console.WriteLine("Running on Development mode!");
     builder.WebHost.UseUrls("http://localhost:5050", "https://localhost:5151");
