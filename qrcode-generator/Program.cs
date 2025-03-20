@@ -10,11 +10,13 @@ app.UseHttpsRedirection();
 
 if (!builder.Environment.IsDevelopment())
 {
-    builder.Services.AddHttpsRedirection(options =>
-    {
-        options.RedirectStatusCode = Status308PermanentRedirect;
-        options.HttpsPort = 8081;
-    });
+    app.Urls.Add("https://*:8081");
+}
+else
+{
+    Console.WriteLine("Running on Development mode!");
+    builder.WebHost.UseUrls("http://localhost:5050", "https://localhost:5151");
+    //NOTE: Use dotnet dev-certs https --trust to run HTTPS locally
 }
 
 // Routes
