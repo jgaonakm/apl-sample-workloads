@@ -19,10 +19,15 @@ app.MapGet("/", () => "QR Code Generator running as Knative Service");
 
 app.MapGet("/generate", async (HttpContext context) =>
 {
-    string? text = context.Request.Query["text"]; // Required
+    // Required
+    string? text = context.Request.Query["text"];
     // Optional parameters
     string? requestedVersion = context.Request.Query["version"];
-    string level = context.Request.Query["level"].First() ?? "M";
+    string level = context.Request.Query["level"].FirstOrDefault();
+    if (string.IsNullOrEmpty(level))
+    {
+        level = "M";
+    }
 
     if (string.IsNullOrEmpty(text))
     {
@@ -33,8 +38,10 @@ app.MapGet("/generate", async (HttpContext context) =>
 
 
     int version = -1;
-    int.TryParse(requestedVersion, out version);
-
+    if (!string.IsNullOrEmpty(requestedVersion))
+    {
+        int.TryParse(requestedVersion, out version);
+    }
 
     ECCLevel eccLevel;
     switch (level)
@@ -66,8 +73,6 @@ app.MapGet("/generate", async (HttpContext context) =>
     utf8BOM: true,
     eciMode: EciMode.Utf8,
     requestedVersion: version))
-
-    //v6-M 2017
     using (PngByteQRCode qrCode = new PngByteQRCode(qrCodeData))
     {
         byte[] imageBytes = qrCode.GetGraphic(20);
