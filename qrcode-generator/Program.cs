@@ -65,7 +65,8 @@ app.MapGet("/generate", async (HttpContext context) =>
     }
 
     // Code generation
-    const string fileName = "qr.png";
+    const string dirName = "images";
+    const string fileName = $"{dirName}/qr.png";
     bool generateFile = true;
 
     bool.TryParse(Environment.GetEnvironmentVariable("GENERATE_FILE") ?? "true", out generateFile);
@@ -85,6 +86,10 @@ app.MapGet("/generate", async (HttpContext context) =>
         {
             if (generateFile)
             {
+                if (!Directory.Exists(dirName))
+                {
+                    Directory.CreateDirectory(dirName);
+                }
                 if (File.Exists(fileName))
                 {
                     File.Delete(fileName);
