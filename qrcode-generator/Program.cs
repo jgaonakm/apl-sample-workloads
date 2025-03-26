@@ -1,6 +1,5 @@
 using QRCoder;
 using static QRCoder.QRCodeGenerator;
-using static Microsoft.AspNetCore.Http.StatusCodes;
 
 
 // Configuring application
@@ -66,6 +65,11 @@ app.MapGet("/generate", async (HttpContext context) =>
     }
 
     // Code generation
+    const string fileName = "qr.png";
+    bool generateFile = true;
+
+    bool.TryParse(Environment.GetEnvironmentVariable("GENERATE_FILE") ?? "true", out generateFile);
+
     using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
     using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(
     text,
@@ -79,10 +83,23 @@ app.MapGet("/generate", async (HttpContext context) =>
         byte[] imageBytes = qrCode.GetGraphic(20);
         using (var ms = new MemoryStream())
         {
+            if (generateFile)
+            {
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
+                using (FileStream fs = new FileStream(fileName, FileMode.CreateNew, FileAccess.Write))
+                {
+                    fs.Write(imageBytes, 0, (int)imageBytes.Length);
+                }
+            }
             context.Response.ContentType = "image/png";
             await context.Response.Body.WriteAsync(imageBytes, 0, imageBytes.Length);
         }
     }
+
+
 });
 
 app.Run();
