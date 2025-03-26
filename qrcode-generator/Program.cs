@@ -65,7 +65,7 @@ app.MapGet("/generate", async (HttpContext context) =>
     }
 
     // Code generation
-    const string dirName = "images";
+    const string dirName = "/etc/images";
     const string fileName = $"{dirName}/qr.png";
     bool generateFile = true;
 
@@ -86,12 +86,16 @@ app.MapGet("/generate", async (HttpContext context) =>
         {
             if (generateFile)
             {
+                Console.WriteLine("Generating file  {0}", fileName);
+
                 if (!Directory.Exists(dirName))
                 {
+                    Console.WriteLine("Creating directory {0}", dirName);
                     Directory.CreateDirectory(dirName);
                 }
                 if (File.Exists(fileName))
                 {
+                    Console.WriteLine("File {0} exists. Deleting", fileName);
                     File.Delete(fileName);
                 }
                 using (FileStream fs = new FileStream(fileName, FileMode.CreateNew, FileAccess.Write))
