@@ -21,7 +21,7 @@ app.MapGet("/read", async (HttpContext context) =>
         return;
     }
 
-    string? value = Environment.GetEnvironmentVariable(secret.ToUpper());
+    string? value = Environment.GetEnvironmentVariable(secret);
 
     if (!string.IsNullOrEmpty(value))
     {
