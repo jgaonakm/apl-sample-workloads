@@ -9,7 +9,7 @@ COPY . /App
 
 RUN dotnet restore -v diag
 
-RUN dotnet publish -c Release -o out -v diag
+RUN dotnet publish -c Release -o out diag
 
 
 # Build runtime image, using multi-stage builds
