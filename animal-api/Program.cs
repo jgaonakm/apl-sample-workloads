@@ -22,8 +22,10 @@ if (builder.Environment.IsDevelopment())
     //NOTE: Use dotnet dev-certs https --trust to run HTTPS locally
 }
 
+app.MapGet("/", () => "Animal API");
 
-new DummyAnimalStore().Populate();
+
+//new DummyAnimalStore().Populate();
 
 app.UseHttpsRedirection();
 app.MapControllers();
