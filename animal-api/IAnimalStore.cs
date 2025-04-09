@@ -3,5 +3,5 @@ public interface IAnimalStore{
 
     IEnumerable<Animal> GetFirstN(int n);
 
-    void Populate();
+    //void Populate();
 }

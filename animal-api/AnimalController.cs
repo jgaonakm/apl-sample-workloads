@@ -26,13 +26,13 @@ public class AnimalController : ControllerBase
         return Ok(animals);
     }
 
-    [HttpPost("/populate")]
-    public ActionResult Populate()
-    {
-        Console.WriteLine("Resetting the animals list");
-        _animalStore.Populate();
+    // [HttpPost("/populate")]
+    // public ActionResult Populate()
+    // {
+    //     Console.WriteLine("Resetting the animals list");
+    //     _animalStore.Populate();
 
-        return Ok();
-    }
+    //     return Ok();
+    // }
 
 }
