@@ -7,9 +7,9 @@ WORKDIR /App
 
 COPY . /App
 
-RUN dotnet restore -v diag
+RUN dotnet restore
 
-RUN dotnet publish -c Release -o out diag
+RUN dotnet publish -c Release -o out
 
 
 # Build runtime image, using multi-stage builds
