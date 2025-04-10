@@ -1,9 +1,9 @@
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers().AddXmlDataContractSerializerFormatters();
 
 var services = builder.Services;
 // Add services to the container.
-services.AddControllers();
+services.AddControllers()
+        .AddXmlDataContractSerializerFormatters();
 services.Scan(selector =>
     selector.FromAssemblyOf<Program>()
     .AddClasses()

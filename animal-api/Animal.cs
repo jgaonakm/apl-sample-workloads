@@ -1,39 +1,39 @@
 using System.Runtime.Serialization;
 
-[DataContract]
+[DataContract(Name = "animal")]
 public class Animal(int id, double? lat, double? lng, string phylum, string className, string order, string family, string genus, string? subnegnus, string specie,
     string country, string? state, string? city, string? area, string source, string biologicalGroup)
 {
-    [DataMember]
+    [DataMember(Name = "id")]
     public int Id { get; internal set; } = id;
-    [DataMember]
+    [DataMember(Name = "lat")]
     public double? Lat { get; internal set; } = lat;
-    [DataMember]
+    [DataMember(Name = "lng")]
     public double? Long { get; internal set; } = lng;
-    [DataMember]
+    [DataMember(Name = "phylum")]
     public string Phylum { get; internal set; } = phylum;
-    [DataMember]
+    [DataMember(Name = "className")]
     public string Class { get; internal set; } = className;
-    [DataMember]
+    [DataMember(Name = "order")]
     public string Order { get; internal set; } = order;
-    [DataMember]
+    [DataMember(Name = "family")]
     public string Family { get; internal set; } = family;
-    [DataMember]
+    [DataMember(Name = "genus")]
     public string Genus { get; internal set; } = genus;
-    [DataMember]
+    [DataMember(Name = "subgenus")]
     public string? Subgenus { get; internal set; } = subnegnus;
-    [DataMember]
+    [DataMember(Name = "specie")]
     public string Specie { get; internal set; } = specie;
-    [DataMember]
+    [DataMember(Name = "country")]
     public string Country { get; internal set; } = country;
-    [DataMember]
+    [DataMember(Name = "state")]
     public string? State { get; internal set; } = state;
-    [DataMember]
+    [DataMember(Name = "city")]
     public string? City { get; internal set; } = city;
-    [DataMember]
+    [DataMember(Name = "area")]
     public string? Area { get; internal set; } = area;
-    [DataMember]
+    [DataMember(Name = "source")]
     public string Source { get; internal set; } = source;
-    [DataMember]
+    [DataMember(Name = "biologicalGroup")]
     public string BiologicalGroup { get; internal set; } = biologicalGroup;
 }

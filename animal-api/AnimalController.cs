@@ -1,3 +1,4 @@
+using Dapper;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("/animals")]
@@ -23,7 +24,8 @@ public class AnimalController : ControllerBase
     public async Task<ActionResult> GetFirstN(int size)
     {
         Console.WriteLine($"Getting first {size} animals.");
-        var animals = await _animalStore.GetFirstN(size);
-        return Ok(animals.ToList());
+        var values = await _animalStore.GetFirstN(size);
+        var animals = new Animals(values.AsList());
+        return Ok(animals);
     }
 }
