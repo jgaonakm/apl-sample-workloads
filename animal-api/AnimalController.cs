@@ -1,4 +1,3 @@
-using Dapper;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("/animals")]
@@ -25,7 +24,7 @@ public class AnimalController : ControllerBase
     {
         Console.WriteLine($"Getting first {size} animals.");
         var values = await _animalStore.GetFirstN(size);
-        var animals = new Animals(values.AsList());
+        var animals = new Animals(values.ToList());
         return Ok(animals);
     }
 }
