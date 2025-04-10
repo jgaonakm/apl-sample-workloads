@@ -19,10 +19,11 @@ public class AnimalController : ControllerBase
     }
 
     [HttpGet("{size:int}")]
+    [Produces("application/xml")]
     public async Task<ActionResult> GetFirstN(int size)
     {
         Console.WriteLine($"Getting first {size} animals.");
         var animals = await _animalStore.GetFirstN(size);
-        return Ok(animals);
+        return Ok(animals.ToList());
     }
 }
