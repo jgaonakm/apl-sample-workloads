@@ -25,7 +25,7 @@ if (builder.Environment.IsDevelopment())
 app.MapGet("/", () => "Animal API");
 
 
-new DummyAnimalStore().Populate();
+//new DummyAnimalStore().Populate();
 
 app.UseHttpsRedirection();
 app.MapControllers();
