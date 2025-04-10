@@ -11,28 +11,18 @@ public class AnimalController : ControllerBase
 
 
     [HttpGet("")]
-    public ActionResult GetAll()
+    public async Task<ActionResult> GetAll()
     {
         Console.WriteLine("Getting all animals. It could take a while");
-        var animals = _animalStore.GetAll();
+        var animals = await _animalStore.GetAll();
         return Ok(animals);
     }
 
     [HttpGet("{size:int}")]
-    public ActionResult GetFirstN(int size)
+    public async Task<ActionResult> GetFirstN(int size)
     {
         Console.WriteLine($"Getting first {size} animals.");
-        var animals = _animalStore.GetFirstN(size);
+        var animals = await _animalStore.GetFirstN(size);
         return Ok(animals);
     }
-
-    // [HttpPost("/populate")]
-    // public ActionResult Populate()
-    // {
-    //     Console.WriteLine("Resetting the animals list");
-    //     _animalStore.Populate();
-
-    //     return Ok();
-    // }
-
 }

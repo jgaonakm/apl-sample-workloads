@@ -1,7 +1,6 @@
 public interface IAnimalStore{
-    IEnumerable<Animal> GetAll();
+    Task<IEnumerable<Animal>> GetAll();
 
-    IEnumerable<Animal> GetFirstN(int n);
+    Task<IEnumerable<Animal>> GetFirstN(int n);
 
-    void Populate();
 }
