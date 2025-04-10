@@ -3,6 +3,6 @@ using System.Runtime.Serialization;
 [DataContract(Name = "animals")]
 public class Animals(IList<Animal> values)
 {
-    [DataMember(Name = "set")]
-    public IList<Animal> Set { get; internal set; } = values;
+    [DataMember(Name = "values")]
+    public IList<Animal> Values { get; internal set; } = values;
 }
