@@ -7,5 +7,7 @@ public interface IAnimalStore{
 
     Task Create(Animal animal);
 
+    Task Update(Animal animal);
+
     Task Delete(Animal animal);
 }

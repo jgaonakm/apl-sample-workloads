@@ -45,7 +45,23 @@ public class AnimalController : ControllerBase
     {
         Console.WriteLine("Saving an animal");
 
-        await _animalStore.Create(animal);
+        var a = await _animalStore.Get(animal.Id);
+
+        if (!(a is null)) return Conflict("Id already exists");
+
+            await _animalStore.Create(animal);
+
+        return Created($"animals/{animal.Id}", animal);
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult> Create(int id, [FromBody] Animal animal)
+    {
+        Console.WriteLine("Saving an animal");
+        var a = await _animalStore.Get(id);
+        if (a is null) return NotFound();
+
+        await _animalStore.Update(animal);
 
         return Created($"animals/{animal.Id}", animal);
     }
