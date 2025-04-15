@@ -11,11 +11,32 @@ public class AnimalController : ControllerBase
     }
 
 
+
     [HttpGet("")]
     public async Task<ActionResult> GetAll()
     {
         Console.WriteLine("Getting all animals. It could take a while");
         var values = await _animalStore.GetAll();
+        var animals = new Animals(values.ToList(), values.Count());
+        return Ok(animals);
+    }
+
+
+    [HttpGet("class/{group}")]
+    public async Task<ActionResult> GetByClass(string group)
+    {
+        switch (group.ToLower())
+        {
+            case "mammalia":
+            case "aves":
+            case "reptilia":
+            case "amphibia":
+                break;
+            default:
+                return BadRequest("Unsupported class name");
+        }
+        Console.WriteLine("Getting all animals from group {0}. It could take a while", 0);
+        var values = await _animalStore.GetByClass(group);
         var animals = new Animals(values.ToList(), values.Count());
         return Ok(animals);
     }
@@ -49,7 +70,7 @@ public class AnimalController : ControllerBase
 
         if (!(a is null)) return Conflict("Id already exists");
 
-            await _animalStore.Create(animal);
+        await _animalStore.Create(animal);
 
         return Created($"animals/{animal.Id}", animal);
     }

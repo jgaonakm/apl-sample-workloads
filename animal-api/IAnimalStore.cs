@@ -5,6 +5,8 @@ public interface IAnimalStore{
 
     Task<IEnumerable<Animal>> GetFirstN(int n);
 
+    Task<IEnumerable<Animal>> GetByClass(string name);
+
     Task Create(Animal animal);
 
     Task Update(Animal animal);

@@ -26,6 +26,11 @@ public partial class DummyAnimalStore : IAnimalStore
         return Task.FromResult(_animalData.Values.AsEnumerable());
     }
 
+    public Task<IEnumerable<Animal>> GetByClass(string name)
+    {
+        return Task.FromResult(_animalData.Values.Where(a => a.ClassName.Equals(name, StringComparison.OrdinalIgnoreCase)));
+    }
+
     public Task<IEnumerable<Animal>> GetFirstN(int n)
     {
         return Task.FromResult(_animalData.Values.Take(n));
