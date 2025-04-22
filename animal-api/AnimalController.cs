@@ -22,10 +22,10 @@ public class AnimalController : ControllerBase
     }
 
 
-    [HttpGet("class/{group}")]
-    public async Task<ActionResult> GetByClass(string group)
+    [HttpGet("class/{className}")]
+    public async Task<ActionResult> GetByClass(string className)
     {
-        switch (group.ToLower())
+        switch (className.ToLower())
         {
             case "mammalia":
             case "aves":
@@ -36,7 +36,7 @@ public class AnimalController : ControllerBase
                 return BadRequest("Unsupported class name");
         }
         Console.WriteLine("Getting all animals from group {0}. It could take a while", 0);
-        var values = await _animalStore.GetByClass(group);
+        var values = await _animalStore.GetByClass(className);
         var animals = new Animals(values.ToList(), values.Count());
         return Ok(animals);
     }
